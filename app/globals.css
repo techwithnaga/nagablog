@@ -3,25 +3,82 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  @apply font-sans;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
+  h1 {
+    @apply text-3xl font-bold;
+  }
+
+  h2 {
+    @apply text-2xl font-bold;
+  }
+
+  h3 {
+    @apply text-xl font-bold;
+  }
+
+  h4 {
+    @apply text-lg font-bold;
+  }
+
+  h5 {
+    @apply text-base font-bold;
+  }
+
+  label {
+    @apply text-xs;
+  }
+}
+
+/* .h1nobold {
+  @apply text-3xl;
+}
+
+.h1bold {
+  @apply text-3xl font-bold;
+} */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+}
+
+body {
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.light {
+  @apply min-h-screen bg-softBgColor text-black;
+}
+/* --bg: #0f172a;
+--textColor: #ddd;
+--softBg: #1f273a;
+--softTextColor: #a6a6a6; */
+.dark {
+  @apply min-h-screen bg-[#0f172a] text-[#ddd];
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+} */
+
+.ql-container {
+  font-size: 28px !important;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  color: #b3b3bb;
 }
