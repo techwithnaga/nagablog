@@ -2,9 +2,9 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const Card = () => {
+const Card = ({ key, item }) => {
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-5" key={key}>
       <div className="basis-1/2 relative max-xl:hidden">
         <Image
           src="/p1.jpeg"
@@ -16,13 +16,8 @@ const Card = () => {
       <div className="basis-1/2 flex flex-col gap-5 py-3 max-xl:basis-full">
         <p>11.02.2023</p>
 
-        <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio ab
-          ullam quaerat. Sapiente quae ab deleniti quidem consequuntur.
-          Molestias provident aspernatur repudiandae? Minima ab corrupti aliquam
-          rem excepturi alias maiores.
-        </p>
+        <h3>{item.title}</h3>
+        <p>{item.desc}</p>
         <span>
           <Link href="/blog/1" className="border-b-2 border-red-200 pb-0.5">
             READ MORE...

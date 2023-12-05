@@ -16,11 +16,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="overflow-scroll">
+      <body className="overflow-scroll bg-softBgColor">
         <AuthProvider>
           <ThemeContextProvider>
             <ThemeProvider>
-              <div className=" max-w-screen-2xl ml-auto mr-auto px-20 max-2xl:max-w-screen-xl max-xl:max-w-screen-lg max-lg:px-5 ">
+              <div className="relative max-w-screen-2xl ml-auto mr-auto px-20 max-2xl:max-w-screen-xl max-xl:max-w-screen-lg max-lg:px-5 ">
                 <Navbar></Navbar>
                 {children}
                 <Footer></Footer>

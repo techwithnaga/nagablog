@@ -6,7 +6,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between py-4 ">
+    <div className="flex items-center justify-between py-4 sticky top-0  z-10">
       <div className="flex gap-3 flex-1 justify-start max-lg:hidden ">
         <Image
           src="/facebook.png"

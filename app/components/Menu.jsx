@@ -1,11 +1,19 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
-
-const Menu = () => {
+const getData = async () => {
+  const res = await fetch("http://localhost:3000/api/categories", {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Failed to get categories");
+  }
+  return res.json();
+};
+const Menu = async () => {
+  const data = await getData();
   return (
-    <div className="basis-1/3 max-md:hidden">
-      <div className="max-xl:hidden">
+    <div className="basis-1/3 max-md:hidden sticky right-0">
+      {/* <div className="max-xl:hidden">
         <h5 className="font-light">What's hot</h5>
         <h2>Most Popular</h2>
         <div className="flex flex-col gap-5 mt-5 cursor-pointer">
@@ -108,48 +116,23 @@ const Menu = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="mt-10 max-md:hidden">
-        <h5 className="font-light">Discover by Topic</h5>
+        <p className="font-light">Discover more of what matters to you</p>
         <h2>Categories</h2>
-        <div className="grid grid-cols-3 justify-items-center gap-5 mt-5">
-          <Link
-            href="/blog/style"
-            className="w-20 border rounded-md border-gray-300 text-center py-1"
-          >
-            Style
-          </Link>
-          <Link
-            href="/blog/fashion"
-            className="w-20 border rounded-md border-gray-300 text-center py-1"
-          >
-            Fashion
-          </Link>
-          <Link
-            href="/blog/food"
-            className="w-20 border rounded-md border-gray-300 text-center py-1"
-          >
-            Food
-          </Link>
-          <Link
-            href="/blog/travel"
-            className="w-20 border rounded-md border-gray-300 text-center py-1"
-          >
-            Travel
-          </Link>
-          <Link
-            href="/blog/culture"
-            className="w-20 border rounded-md border-gray-300 text-center py-1"
-          >
-            Culture
-          </Link>
-          <Link
-            href="/blog/coding"
-            className="w-20 border rounded-md border-gray-300 text-center py-1"
-          >
-            Coding
-          </Link>
+        <div className="flex flex-wrap justify-items-center gap-3 mt-5 border border-gray-300 rounded-md p-3">
+          {data.map((item) => {
+            return (
+              <Link
+                href="/blog/style"
+                className="border rounded-md border-gray-300 text-center py-1 px-2"
+                key={item._id}
+              >
+                {item.title}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

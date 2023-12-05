@@ -14,8 +14,6 @@ const AuthLinks = () => {
 
   const { data, status } = useSession();
 
-  console.log(data, status);
-
   return (
     <div>
       {status !== "authenticated" ? (
