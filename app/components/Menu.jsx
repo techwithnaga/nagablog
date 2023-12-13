@@ -125,7 +125,7 @@ const Menu = async () => {
           {data.map((item) => {
             return (
               <Link
-                href="/blog/style"
+                href={`/blog/?cat=${item.title}`}
                 className="border rounded-md border-gray-300 text-center py-1 px-2"
                 key={item._id}
               >

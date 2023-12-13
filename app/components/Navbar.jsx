@@ -37,9 +37,11 @@ const Navbar = () => {
           className="cursor-pointer"
         ></Image>
       </div>
-      <div className="flex-1 text-center max-lg:text-start">
-        <h2>Naga's Blog</h2>
-      </div>
+      <Link href="/">
+        <div className="flex-1 text-center max-lg:text-start cursor-pointer">
+          <h2>Naga's Blog</h2>
+        </div>
+      </Link>
       <div className="flex gap-5 justify-end flex-1 align-center items-center ">
         <ThemeToggle />
         <Link className="max-md:hidden" href="/">

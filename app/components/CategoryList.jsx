@@ -8,7 +8,7 @@ const CategoryList = () => {
       <h1>Categories</h1>
       <div className="flex gap-5 flex-wrap">
         <Link
-          href="/blog/style"
+          href="/blog/?cat=style"
           className="flex items-center gap-3 border rounded-lg w-40 py-3 justify-center "
         >
           <div className="w-10 h-8 relative">
@@ -23,7 +23,7 @@ const CategoryList = () => {
         </Link>
 
         <Link
-          href="/blog/fashion"
+          href="/blog/?cat=fashion"
           className="flex items-center gap-3 border rounded-lg w-40 py-3 justify-center "
         >
           <div className="w-8 h-8 relative">
@@ -37,7 +37,7 @@ const CategoryList = () => {
           <p className="bobboldfont">Fashion</p>
         </Link>
         <Link
-          href="/blog/fashion"
+          href="/blog/?cat=food"
           className="flex items-center gap-3 border rounded-lg w-40 py-3 justify-center "
         >
           <div className="w-8 h-8 relative">
@@ -51,7 +51,7 @@ const CategoryList = () => {
           Food
         </Link>
         <Link
-          href="/blog/coding"
+          href="/blog/?cat=coding"
           className="flex items-center gap-3 border rounded-lg w-40 py-3 justify-center "
         >
           <div className="w-8 h-8 relative">
@@ -65,7 +65,7 @@ const CategoryList = () => {
           Coding
         </Link>
         <Link
-          href="/blog/travel"
+          href="/blog/?cat=travels"
           className="flex items-center gap-3 border rounded-lg w-40 py-3 justify-center "
         >
           <div className="w-8 h-8 relative">
@@ -80,7 +80,7 @@ const CategoryList = () => {
         </Link>
 
         <Link
-          href="/blog/style"
+          href="/blog/?cat=style"
           className="flex items-center gap-3 border rounded-lg w-40 py-3 justify-center "
         >
           <div className="w-8 h-8 relative">
