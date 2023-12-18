@@ -22,8 +22,6 @@ export const GET = async (req) => {
       prisma.post.findMany(query),
       prisma.post.count({ where: query.where }),
     ]);
-    console.log("in API");
-    console.log(posts, count);
 
     return new NextResponse(JSON.stringify({ posts, count }, { status: 200 }));
   } catch (err) {

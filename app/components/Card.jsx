@@ -19,7 +19,10 @@ const Card = ({ key, item }) => {
         <h3>{item.title}</h3>
         <p>{item.desc}</p>
         <span>
-          <Link href="/blog/1" className="border-b-2 border-red-200 pb-0.5">
+          <Link
+            href={`/posts/${item.slug}`}
+            className="border-b-2 border-red-200 pb-0.5"
+          >
             READ MORE...
           </Link>
         </span>
