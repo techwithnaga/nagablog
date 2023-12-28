@@ -7,7 +7,7 @@ const getData = async (slug) => {
   const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
     cache: "no-store",
   });
-  // console.log(res);
+
   if (!res.ok) {
     throw new Error("Failed to get categories");
   }
@@ -17,6 +17,7 @@ const getData = async (slug) => {
 const page = async ({ params }) => {
   const { slug } = params;
   const data = await getData(slug);
+
   return (
     <div className="">
       <div className="flex justify-between gap-10 mt-10">
@@ -46,6 +47,7 @@ const page = async ({ params }) => {
             <div className="w-full h-full relative">
               <Image
                 src={data.img}
+                alt={data.img}
                 fill
                 className="object-cover rounded-xl"
               ></Image>

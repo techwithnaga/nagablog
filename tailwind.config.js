@@ -15,6 +15,10 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontFamily: {
+        spartan: ["League Spartan", "sans-serif"],
+        mono: ["Roboto Mono", "monospace"],
+      },
       colors: {
         white: "#ffffff",
         softBgColor: "#f5f5f5",

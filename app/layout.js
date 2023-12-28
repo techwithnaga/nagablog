@@ -16,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="overflow-scroll bg-softBgColor">
+      <body className="overflow-scroll bg-softBgColor ">
         <AuthProvider>
           <ThemeContextProvider>
             <ThemeProvider>

@@ -18,12 +18,12 @@ const AuthLinks = () => {
     <div>
       {status !== "authenticated" ? (
         <div className="max-md:hidden">
-          <Link href="/login">Login</Link>
+          <Link href="/login">03.Login</Link>
         </div>
       ) : (
         <div className="max-md:hidden">
           <span className="cursor-pointer" onClick={signOut}>
-            Logout
+            03.Logout
           </span>
         </div>
       )}
@@ -62,11 +62,11 @@ const AuthLinks = () => {
 
             {status !== "authenticated" ? (
               <Link href="/login" className="text-2xl">
-                Login
+                03.Login
               </Link>
             ) : (
               <span className="cursor-pointer text-2xl" onClick={signOut}>
-                Logout
+                03.Logout
               </span>
             )}
           </div>

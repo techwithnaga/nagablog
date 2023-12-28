@@ -1,57 +1,40 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import AuthLinks from "./AuthLinks";
 import ThemeToggle from "./ThemeToggle";
+import { useSession } from "next-auth/react";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Navbar = () => {
+  const { data, status } = useSession();
+  const { theme } = useContext(ThemeContext);
   return (
-    <div className="flex items-center justify-between py-4 sticky top-0  z-10">
-      <div className="flex gap-3 flex-1 justify-start max-lg:hidden ">
-        <Image
-          src="/facebook.png"
-          alt="facebook"
-          width={24}
-          height={24}
-          className="cursor-pointer"
-        ></Image>
-        <Image
-          src="/instagram.png"
-          alt="instagram"
-          width={24}
-          height={24}
-          className="cursor-pointer"
-        ></Image>
-        <Image
-          src="/tiktok.png"
-          alt="tiktok"
-          width={24}
-          height={24}
-          className="cursor-pointer"
-        ></Image>
-        <Image
-          src="/youtube.png"
-          alt="youtube"
-          width={24}
-          height={24}
-          className="cursor-pointer"
-        ></Image>
-      </div>
+    <div
+      className={`flex items-center justify-between py-4 sticky top-0  z-10 font-mono ${
+        theme === "dark" ? "bg-[#0f172a]" : "bg-softBgColor"
+      }`}
+    >
       <Link href="/">
         <div className="flex-1 text-center max-lg:text-start cursor-pointer">
-          <h2>Naga's Blog</h2>
+          <h2>TechWithNaga</h2>
         </div>
       </Link>
       <div className="flex gap-5 justify-end flex-1 align-center items-center ">
         <ThemeToggle />
+        {status === "authenticated" && (
+          <Link className="max-md:hidden" href="/write">
+            Write
+          </Link>
+        )}
+
         <Link className="max-md:hidden" href="/">
-          Homepage
+          01.Contact
         </Link>
         <Link className="max-md:hidden" href="/">
-          Contact
-        </Link>
-        <Link className="max-md:hidden" href="/">
-          About
+          02.About Me
         </Link>
         <AuthLinks />
       </div>
