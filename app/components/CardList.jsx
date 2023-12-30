@@ -18,19 +18,29 @@ const getPosts = async (page, cat) => {
 
 const CardList = async ({ page, cat }) => {
   const { posts, count } = await getPosts(page, cat);
-  // console.log(posts, count);
-  const POST_PER_PAGE = 2;
+  const POST_PER_PAGE = 5;
   const hasPrev = page !== 1;
   const hasNext = page * POST_PER_PAGE < count;
   return (
-    <div className="basis-2/3 max-md:basis-full ">
-      <h2 className="mb-5">Recent Post</h2>
-      <div className="flex flex-col gap-5">
-        {posts?.map((item) => {
-          return <Card item={item} key={item._id} />;
-        })}
+    <div className="basis-3/4 max-xl:basis-full  ">
+      {/* <h2 className="mb-5">Recent Post</h2> */}
+      <div className="flex flex-col gap-12">
+        {posts.length > 0 ? (
+          posts.map((item) => {
+            return <Card item={item} key={item._id} />;
+          })
+        ) : (
+          <p> No blogs found under this category</p>
+        )}
       </div>
-      <Pagination page={page} hasNext={hasNext} hasPrev={hasPrev} />
+      {!cat && (
+        <Pagination
+          page={page}
+          hasNext={hasNext}
+          hasPrev={hasPrev}
+          count={count}
+        />
+      )}
     </div>
   );
 };

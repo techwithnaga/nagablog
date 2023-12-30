@@ -12,7 +12,7 @@ const getData = async () => {
 const Menu = async () => {
   const data = await getData();
   return (
-    <div className="basis-1/3 max-md:hidden sticky right-0">
+    <div className="basis-1/4 max-xl:hidden sticky right-0  ">
       <div className="mt-10 max-md:hidden">
         <p className="font-light">Discover more of what matters to you</p>
         <h2>Categories</h2>
@@ -21,7 +21,7 @@ const Menu = async () => {
             return (
               <Link
                 href={`/blog/?cat=${item.title}`}
-                className="border rounded-md border-gray-300 text-center py-1 px-2"
+                className="border rounded-md border-gray-300 text-center py-1 px-2 text-sm"
                 key={item._id}
               >
                 {item.title}

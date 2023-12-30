@@ -62,7 +62,9 @@ model Category {
   slug  String  @unique @default("")
   title String
   img   String?
-  Posts Post[]
+  // postSlug String @default("")
+  postIds String[]
+  posts Post[] @relation(fields:[postIds], references: [id])
 }
 
 model Post {
@@ -71,14 +73,18 @@ model Post {
   slug      String    @unique
   title     String
   desc      String
+  content   String    @default("")
   img       String?
   views     Int       @default(0)
   catSlug   String    @default("")
-  cat       Category  @relation(fields: [catSlug], references: [slug])
+  // cat       Category  @relation(fields: [catSlug], references: [slug])
+  catIds String[]
+  categories Category[] @relation(fields: [catIds],  references: [id] )
   userEmail String
   user      User      @relation(fields: [userEmail], references: [email])
   comments  Comment[]
 }
+
 
 model Comment {
   id        String   @id @default(cuid()) @map("_id")

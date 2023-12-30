@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
 const Navbar = () => {
-  const { data, status } = useSession();
+  const { status } = useSession();
   const { theme } = useContext(ThemeContext);
   return (
     <div
@@ -30,11 +30,11 @@ const Navbar = () => {
           </Link>
         )}
 
-        <Link className="max-md:hidden" href="/">
+        {/* <Link className="max-md:hidden" href="/">
           01.Contact
-        </Link>
+        </Link> */}
         <Link className="max-md:hidden" href="/">
-          02.About Me
+          Contact
         </Link>
         <AuthLinks />
       </div>

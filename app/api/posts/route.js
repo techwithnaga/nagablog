@@ -6,9 +6,8 @@ export const GET = async (req) => {
   const { searchParams } = new URL(req.url);
   const page = searchParams.get("page");
   const cat = searchParams.get("cat");
-  console.log(page, cat);
 
-  const POST_PER_PAGE = 2;
+  const POST_PER_PAGE = 5;
 
   const query = {
     take: POST_PER_PAGE,
@@ -16,15 +15,44 @@ export const GET = async (req) => {
     where: {
       ...(cat && { catSlug: cat }),
     },
+    include: {
+      categories: {
+        select: {
+          title: true,
+        },
+      },
+    },
   };
 
   try {
-    const [posts, count] = await prisma.$transaction([
-      prisma.post.findMany(query),
-      prisma.post.count({ where: query.where }),
-    ]);
+    if (cat) {
+      const category = await prisma.category.findUnique({
+        where: { slug: cat },
+        include: {
+          Posts: {
+            include: { categories: true },
+          },
+        },
+      });
 
-    return new NextResponse(JSON.stringify({ posts, count }, { status: 200 }));
+      if (!category) {
+        throw new Error("category is not found!");
+      }
+      const posts = category.Posts;
+      const count = posts.length;
+      return new NextResponse(
+        JSON.stringify({ posts, count }, { status: 200 })
+      );
+    } else {
+      const [posts, count] = await prisma.$transaction([
+        prisma.post.findMany(query),
+        prisma.post.count({ where: query.where }),
+      ]);
+
+      return new NextResponse(
+        JSON.stringify({ posts, count }, { status: 200 })
+      );
+    }
   } catch (err) {
     console.log(err);
     return new NextResponse(
