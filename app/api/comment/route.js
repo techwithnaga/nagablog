@@ -12,6 +12,9 @@ export const GET = async (req) => {
       },
       include: { user: true },
     });
+    comments.sort((a, b) => {
+      return b.createdAt - a.createdAt;
+    });
 
     return new NextResponse(JSON.stringify(comments, { status: 200 }));
   } catch (err) {
