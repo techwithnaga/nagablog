@@ -21,6 +21,12 @@ export const GET = async (req) => {
           title: true,
         },
       },
+      user: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
     },
   };
 

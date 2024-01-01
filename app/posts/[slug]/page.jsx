@@ -24,18 +24,17 @@ const getData = async (slug) => {
 const page = async ({ params }) => {
   const { slug } = params;
   const data = await getData(slug);
-  console.log(data);
 
   return (
     <div className="pb-[270px]">
       <div className="flex justify-between gap-10 mt-10">
         <div className="flex flex-col basis-3/4 gap-6 max-md:basis-full">
-          <div className="w-full h-[450px] relative rounded-xl">
+          <div className="w-full h-[475px] relative rounded-xl">
             <Image
-              src="/deepmind.jpeg"
-              alt={data.img}
-              className="object-cover"
+              src={data.img}
+              alt="blog header image"
               fill
+              objectFit="cover"
             ></Image>
           </div>
 

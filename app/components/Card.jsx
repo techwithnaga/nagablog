@@ -2,13 +2,17 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import parse from "html-react-parser";
+import { BsTags } from "react-icons/bs";
+import { format } from "date-fns";
+import CategoryBtn from "./CategoryBtn";
 
 const Card = ({ key, item }) => {
+  console.log(item);
   return (
     <div className="flex gap-8 items-start " key={key}>
       <div className="basis-1/3 relative h-[250px] max-md:hidden">
         <Image
-          src="/p1.jpeg"
+          src={item.img}
           fill
           alt="cardImage"
           className="object-cover "
@@ -22,26 +26,23 @@ const Card = ({ key, item }) => {
         {parse(item.desc)}
         {/* <p dangerouslySetInnerHTML={{ __html:  }}> */}
 
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-3 items-center">
           <Image
-            src="/myPic.png"
+            src={item.user.image}
             width={25}
             height={25}
             className="rounded-full"
+            alt="user image"
           ></Image>
-          <p className="text-xs text-gray-500">Masnaga</p>
-          <p className="text-xs text-gray-500">11.02.2023</p>
+          <p className="text-xs text-gray-500">{item.user.name}</p>
+          <p className="text-xs text-gray-500">
+            {format(item.createdAt, "MMM d, y")}
+          </p>
         </div>
         <div className="flex gap-3">
+          <BsTags></BsTags>
           {item.categories.map((cat) => {
-            return (
-              <label
-                className="text-gray-400 border border-gray-400 p-1 rounded-md cursor-pointer"
-                htmlFor="culture"
-              >
-                {cat.title}
-              </label>
-            );
+            return <CategoryBtn title={cat.title} size="small"></CategoryBtn>;
           })}
         </div>
       </div>
