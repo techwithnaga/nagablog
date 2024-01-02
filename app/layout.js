@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <ThemeContextProvider>
             <ThemeProvider>
-              <div className="relative min-h-screen  max-w-screen-2xl ml-auto mr-auto px-20 max-2xl:max-w-screen-xl  max-lg:px-5 ">
+              <div className="flex flex-col min-h-screen max-w-screen-2xl ml-auto mr-auto px-20 max-2xl:max-w-screen-xl max-lg:px-5 ">
                 <Navbar></Navbar>
                 {children}
                 <Footer></Footer>

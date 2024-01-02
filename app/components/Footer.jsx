@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className=" absolute bottom-0 h-[250px] ">
+    <div className="h-[250px]">
       <div className="mt-10 flex items-center max-xl:flex-col">
         <div className="basis-2/3 flex gap-5">
           {/* <div className="flex gap-5 items-center basis-1/5 min-h-[150px] relative ">
@@ -68,6 +68,7 @@ const Footer = () => {
           </span>
         </label>
       </div>
+      <div style={{ clear: "both" }}></div>
     </div>
   );
 };

@@ -28,13 +28,13 @@ const Card = ({ key, item }) => {
 
         <div className="flex gap-3 items-center">
           <Image
-            src={item.user.image}
+            src={item.user?.image}
             width={25}
             height={25}
             className="rounded-full"
             alt="user image"
           ></Image>
-          <p className="text-xs text-gray-500">{item.user.name}</p>
+          <p className="text-xs text-gray-500">{item.user?.name}</p>
           <p className="text-xs text-gray-500">
             {format(item.createdAt, "MMM d, y")}
           </p>

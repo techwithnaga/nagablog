@@ -23,7 +23,7 @@ const page = () => {
   }
 
   return (
-    <div className="flex justify-center items-center mt-12 mb-10">
+    <div className="flex flex-1 justify-center items-center mt-12 mb-10">
       <div className=" flex justify-between rounded-md  max-md:px-10 items-center bg-gray-200 ">
         <Image
           src="/developer.jpg"

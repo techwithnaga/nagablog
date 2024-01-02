@@ -1,17 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import { useRouter } from "next/navigation";
-import { firebaseApp } from "../utils/firebase";
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
+import { uploadImage } from "../utils/firebase";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FadeLoader } from "react-spinners";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -25,7 +22,6 @@ const fetcher = async (url) => {
 };
 
 const page = () => {
-  const storage = getStorage(firebaseApp);
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -33,6 +29,7 @@ const page = () => {
   const [catSlug, setCatSlug] = useState("");
   const [title, setTitle] = useState("");
   const [mediaUrl, setMediaUrl] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
 
   const updatefile = (data) => {
     console.log(data);
@@ -64,78 +61,78 @@ const page = () => {
     }
   };
 
-  useEffect(() => {
-    const upload = () => {
-      const uniqueFileName = new Date().getTime + file.name;
-      const storageRef = ref(storage, uniqueFileName);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+  const handleAddImage = async (e) => {
+    e.preventDefault();
 
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-          }
-        },
-        (error) => {},
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log(downloadURL);
-            setMediaUrl(downloadURL);
-          });
-        }
-      );
-    };
+    if (!title) {
+      toast.error("Please insert a title");
+    } else {
+      document.getElementById("image").click();
+    }
+  };
 
-    file && upload();
-  }, [file]);
+  const handleChange = async (e) => {
+    e.preventDefault();
+    setIsUploading(true);
+    setFile(e.target.files[0]);
+
+    //upload Image to firebase
+    const uniqueFileName = title;
+    const newURL = await uploadImage(e.target.files[0], uniqueFileName);
+    setMediaUrl(newURL);
+    setIsUploading(false);
+  };
 
   return (
-    <div className="mt-10">
+    <div className="mt-10 w-[75%] flex-1">
       <input
         type="text"
         placeholder="Title"
         className="text-5xl border-none outline-none w-full p-3 bg-transparent"
         onChange={(e) => setTitle(e.target.value)}
       />
-      <div className="flex gap-10 h-10 items-center my-5  z-10 w-full relative">
+      <div className="flex gap-10 h-10 items-center my-5 z-10 w-full">
+        <input
+          type="file"
+          id="image"
+          onChange={(e) => handleChange(e)}
+          className="hidden"
+        ></input>
+
         <button
-          className="border border-gray-400 rounded-full w-10 h-10 flex items-center justify-center absolute bg-gray-100"
-          onClick={() => setOpen(!open)}
+          className="border border-gray-400 rounded-full w-10 h-10 flex items-center justify-center bg-gray-100"
+          onClick={(e) => handleAddImage(e)}
         >
           <Image src="/plus.png" alt="" width={20} height={20} />
         </button>
 
-        {open && (
-          <div className="flex gap-5 absolute left-16">
-            <input
-              type="file"
-              id="image"
-              onChange={(e) => updatefile(e.target.files[0])}
-              className="hidden"
-            ></input>
-            <label htmlFor="image" className="cursor-pointer">
-              <button className="border border-green-400 rounded-full w-10 h-10 flex items-center justify-center bg-gray-100">
-                <Image src="/image.png" alt="" width={20} height={20} />
-              </button>
-            </label>
-            <button className="border border-green-400 rounded-full w-10 h-10 flex items-center justify-center bg-gray-100 ">
-              <Image src="/external.png" alt="" width={20} height={20} />
-            </button>
-            <button className="border border-green-400 rounded-full w-10 h-10 flex items-center justify-center bg-gray-100 ">
-              <Image src="/video.png" alt="" width={20} height={20} />
-            </button>
-          </div>
-        )}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </div>
+
+      {isUploading && <FadeLoader></FadeLoader>}
+
+      {mediaUrl && (
+        <div className="w-full h-[500px] relative rounded-xl">
+          <Image
+            src={mediaUrl}
+            alt="blog header image"
+            fill
+            objectFit="cover"
+          ></Image>
+        </div>
+      )}
+
       <ReactQuill
         theme="bubble"
         onChange={setValue}
@@ -144,7 +141,7 @@ const page = () => {
         className="text-grey-700 text-xl"
       ></ReactQuill>
 
-      <div className="flex flex-col w-[20%] my-10">
+      <div className="flex flex-col">
         <select
           name="categories"
           id="categories"
@@ -165,6 +162,7 @@ const page = () => {
           Publish
         </button>
       </div>
+      <div style={{ clear: "both" }}></div>
     </div>
   );
 };
