@@ -5,6 +5,7 @@ import {
   ref,
   uploadBytesResumable,
   getDownloadURL,
+  deleteObject,
 } from "firebase/storage";
 
 const firebaseConfig = {
@@ -57,5 +58,22 @@ export const uploadImage = (file, fileName) => {
         });
       }
     );
+  });
+};
+
+export const deleteImage = (fileName) => {
+  return new Promise((resolve) => {
+    const desertRef = ref(storage, fileName);
+
+    // Delete the file
+    deleteObject(desertRef)
+      .then(() => {
+        // File deleted successfully
+        resolve("success");
+      })
+      .catch((error) => {
+        // Uh-oh, an error occurred!
+        console.log(error);
+      });
   });
 };

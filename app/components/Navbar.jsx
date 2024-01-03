@@ -25,7 +25,7 @@ const Navbar = () => {
       <div className="flex gap-5 justify-end flex-1 align-center items-center ">
         <ThemeToggle />
         {status === "authenticated" && (
-          <Link className="max-md:hidden" href="/write">
+          <Link className="max-md:hidden" href="/createBlog">
             Write
           </Link>
         )}

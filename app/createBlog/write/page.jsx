@@ -5,7 +5,7 @@ import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import { useRouter } from "next/navigation";
-import { uploadImage } from "../utils/firebase";
+import { uploadImage } from "../../utils/firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FadeLoader } from "react-spinners";
@@ -17,7 +17,6 @@ const fetcher = async (url) => {
     const error = new Error(data.message);
     throw error;
   }
-
   return data;
 };
 

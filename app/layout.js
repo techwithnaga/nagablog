@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import { ThemeContextProvider } from "./context/ThemeContext";
 import ThemeProvider from "./providers/ThemeProviders";
 import AuthProvider from "./providers/AuthProvider";
+import QueryProvider from "./providers/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,13 +20,15 @@ export default function RootLayout({ children }) {
       <body className="overflow-scroll bg-softBgColor">
         <AuthProvider>
           <ThemeContextProvider>
-            <ThemeProvider>
-              <div className="flex flex-col min-h-screen max-w-screen-2xl ml-auto mr-auto px-20 max-2xl:max-w-screen-xl max-lg:px-5 ">
-                <Navbar></Navbar>
-                {children}
-                <Footer></Footer>
-              </div>
-            </ThemeProvider>
+            <QueryProvider>
+              <ThemeProvider>
+                <div className="flex flex-col min-h-screen max-w-screen-2xl ml-auto mr-auto px-20 max-2xl:max-w-screen-xl max-lg:px-5 ">
+                  <Navbar></Navbar>
+                  {children}
+                  <Footer></Footer>
+                </div>
+              </ThemeProvider>
+            </QueryProvider>
           </ThemeContextProvider>
         </AuthProvider>
       </body>
