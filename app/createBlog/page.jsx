@@ -11,8 +11,9 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { green } from "@mui/material/colors";
+import { useBlogStore } from "../utils/store";
 
-const page = () => {
+const CreateBlog = () => {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [fileName, setFileName] = useState("");
@@ -20,18 +21,18 @@ const page = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [mediaUrl, setMediaUrl] = useState("");
   const [file, setFile] = useState(null);
-  const [showTags, setShowTags] = useState(true);
+  const [showTags, setShowTags] = useState(false);
   const [showNextButton, setShowNextButton] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [tags, setTags] = useState([]);
+  const [checkBoxStates, setCheckBoxStates] = useState();
   const [errorMessages, setErrorMessages] = useState({
     title: "",
     mediaUrl: "",
     tags: "",
   });
-  const [tags, setTags] = useState([]);
 
-  const [checkBoxStates, setCheckBoxStates] = useState();
+  const { createBlog } = useBlogStore();
 
   const handleAddImage = (e) => {
     e.preventDefault();
@@ -78,11 +79,6 @@ const page = () => {
   };
 
   const handleCheckBoxChange = (e) => {
-    // console.log(e.target.name);
-    // console.log(e.target.checked);
-    // if (e.target.checked){
-
-    // }
     setCheckBoxStates({ ...checkBoxStates, [e.target.name]: e.target.checked });
     setShowNextButton(true);
     setErrorMessages({ ...errorMessages, tags: "" });
@@ -91,7 +87,15 @@ const page = () => {
   const handleSubmit = () => {
     //check for errors
     if (!isError()) {
-      console.log("SUBMIT!!!!");
+      // localStorage.setItem("title", title);
+      let listOfTags = [];
+      for (const [key, value] of Object.entries(checkBoxStates)) {
+        if (value) {
+          listOfTags.push(key);
+        }
+      }
+      createBlog(title, listOfTags, mediaUrl);
+      router.push("/writecontent", { title, listOfTags, mediaUrl });
     }
   };
 
@@ -291,4 +295,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CreateBlog;

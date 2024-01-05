@@ -5,6 +5,7 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "firebasestorage.googleapis.com",
       "console.firebase.google.com",
+      "www.planetware.com",
     ],
   },
   env: {

@@ -9,6 +9,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { BsTags } from "react-icons/bs";
 import { format } from "date-fns";
 import CategoryBtn from "@/app/components/CategoryBtn";
+// import { useQuery } from "@tanstack/react-query";
 
 const getData = async (slug) => {
   const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
@@ -24,6 +25,19 @@ const getData = async (slug) => {
 const page = async ({ params }) => {
   const { slug } = params;
   const data = await getData(slug);
+
+  // const { isPending, isError, data, error } = useQuery({
+  //   queryKey: ["article"],
+  //   queryFn: getData,
+  // });
+
+  // if (isPending) {
+  //   return <span>Loading...</span>;
+  // }
+
+  // if (isError) {
+  //   return <span>Error: {error.message}</span>;
+  // }
 
   return (
     <div className="pb-[270px]">
