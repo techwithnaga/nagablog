@@ -72,7 +72,8 @@ model Post {
   createdAt DateTime  @default(now())
   slug      String    @unique
   title     String
-  // desc      String
+  desc      String    @default("")
+  minutesToRead Int   @default(5)
   content   String    @default("")
   img       String?
   views     Int       @default(0)

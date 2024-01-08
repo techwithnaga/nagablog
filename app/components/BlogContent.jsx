@@ -9,17 +9,32 @@ import { IoEyeOutline } from "react-icons/io5";
 import { format } from "date-fns";
 import { BsTags } from "react-icons/bs";
 import CategoryBtn from "@/app/components/CategoryBtn";
-import Menu from "../components/Menu";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const BlogContent = () => {
-  const { title, tags, mediaUrl } = useBlogStore();
-
+  const { title, selectedCategories, mediaUrl } = useBlogStore();
   const [content, setContent] = useState("");
   const { data } = useSession();
+  const router = useRouter();
   const handleSubmit = () => {
-    console.log("handle submit");
+    axios
+      .post("http://localhost:3000/api/posts", {
+        slug: title,
+        title: title,
+        content: content,
+        img: mediaUrl,
+        categories: selectedCategories,
+      })
+      .then((res) => {
+        console.log(res.data.slug);
+        router.push(`/posts/${res.slug}`);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   const modules = {
@@ -46,7 +61,6 @@ const BlogContent = () => {
 
   return (
     <div>
-      {" "}
       <div className="flex justify-between gap-10 mt-10">
         <div className="flex flex-col basis-3/4 gap-6 max-md:basis-full">
           <div className="w-full h-[475px] relative rounded-xl">
@@ -59,6 +73,13 @@ const BlogContent = () => {
           </div>
 
           <h1 className="">{title}</h1>
+          <textarea
+            type="text"
+            name="description"
+            placeholder="Description..."
+            rows={5}
+            className="border-none bg-[softBgColor]"
+          />
           <div className="flex gap-5 text-gray-500">
             <p>by {data?.user?.name}</p>
             <div className="flex gap-2 items-center ">
@@ -78,8 +99,10 @@ const BlogContent = () => {
           <div className="flex gap-3 items-center">
             <BsTags className="text-gray-500 text-xl"></BsTags>
             <div className="flex gap-2">
-              {tags.map((tag) => {
-                return <CategoryBtn title={tag} size="small"></CategoryBtn>;
+              {selectedCategories.map((cat) => {
+                return (
+                  <CategoryBtn title={cat.title} size="small"></CategoryBtn>
+                );
               })}
             </div>
           </div>

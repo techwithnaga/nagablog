@@ -5,10 +5,14 @@ export const useBlogStore = create(
   persist(
     (set) => ({
       title: "",
-      tags: [],
+      selectedCategories: [],
       mediaUrl: "",
-      createBlog: (title, tags, mediaUrl) =>
-        set(() => ({ title: title, tags: tags, mediaUrl: mediaUrl })),
+      createBlog: (title, selectedCategories, mediaUrl) =>
+        set(() => ({
+          title: title,
+          selectedCategories: selectedCategories,
+          mediaUrl: mediaUrl,
+        })),
     }),
     {
       name: "blog-storage", // name of the item in the storage (must be unique)

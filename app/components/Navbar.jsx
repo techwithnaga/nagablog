@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
 const Navbar = () => {
-  const { status } = useSession();
+  const { data, status } = useSession();
   const { theme } = useContext(ThemeContext);
   return (
     <div
@@ -19,16 +19,17 @@ const Navbar = () => {
     >
       <Link href="/">
         <div className="flex-1 text-center max-lg:text-start cursor-pointer">
-          <h2>TechWithNaga</h2>
+          <h2>TechWithNaga.Blog</h2>
         </div>
       </Link>
       <div className="flex gap-5 justify-end flex-1 align-center items-center ">
         <ThemeToggle />
-        {status === "authenticated" && (
-          <Link className="max-md:hidden" href="/createBlog">
-            Write
-          </Link>
-        )}
+        {status === "authenticated" &&
+          data.user.email === "techwithnaga@gmail.com" && (
+            <Link className="max-md:hidden" href="/createBlog">
+              Write
+            </Link>
+          )}
 
         {/* <Link className="max-md:hidden" href="/">
           01.Contact

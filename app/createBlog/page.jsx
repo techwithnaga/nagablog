@@ -24,7 +24,7 @@ const CreateBlog = () => {
   const [showTags, setShowTags] = useState(false);
   const [showNextButton, setShowNextButton] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [tags, setTags] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [checkBoxStates, setCheckBoxStates] = useState();
   const [errorMessages, setErrorMessages] = useState({
     title: "",
@@ -94,8 +94,18 @@ const CreateBlog = () => {
           listOfTags.push(key);
         }
       }
-      createBlog(title, listOfTags, mediaUrl);
-      router.push("/writecontent", { title, listOfTags, mediaUrl });
+      let selectedCategories = [];
+
+      categories.forEach((cat) => {
+        if (listOfTags.includes(cat.slug)) {
+          selectedCategories.push(cat);
+        }
+      });
+
+      console.log("LENGTH : " + selectedCategories.length);
+
+      createBlog(title, selectedCategories, mediaUrl);
+      router.push("/writecontent");
     }
   };
 
@@ -163,11 +173,14 @@ const CreateBlog = () => {
       await axios
         .get("http://localhost:3000/api/categories")
         .then((res) => {
-          setTags(res.data);
-          let tags = res.data;
+          setCategories(res.data);
+          let categories = res.data;
           let newCheckBoxStates = {};
-          for (let i = 0; i < tags.length; i++) {
-            newCheckBoxStates = { ...newCheckBoxStates, [tags[i].slug]: false };
+          for (let i = 0; i < categories.length; i++) {
+            newCheckBoxStates = {
+              ...newCheckBoxStates,
+              [categories[i].slug]: false,
+            };
           }
           setCheckBoxStates(newCheckBoxStates);
         })
@@ -254,13 +267,13 @@ const CreateBlog = () => {
           <p>What is your blog about?</p>
 
           <FormGroup className="ml-5">
-            {tags?.map((tag) => {
+            {categories?.map((category) => {
               return (
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={checkBoxStates[tag.slug]}
-                      name={tag.slug}
+                      checked={checkBoxStates[category.slug]}
+                      name={category.slug}
                       onChange={(e) => handleCheckBoxChange(e)}
                       sx={{
                         color: green[800],
@@ -270,7 +283,7 @@ const CreateBlog = () => {
                       }}
                     />
                   }
-                  label={tag.title}
+                  label={category.title}
                 />
               );
             })}

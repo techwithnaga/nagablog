@@ -81,6 +81,8 @@ export const POST = async (req) => {
       data: { ...body, userEmail: session.user.email },
     });
 
+    console.log("POST : " + post);
+
     return new NextResponse(JSON.stringify(post, { status: 200 }));
   } catch (err) {
     console.log(err);

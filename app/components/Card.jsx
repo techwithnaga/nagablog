@@ -7,7 +7,6 @@ import { format } from "date-fns";
 import CategoryBtn from "./CategoryBtn";
 
 const Card = ({ key, item }) => {
-  console.log(item);
   return (
     <div className="flex gap-8 items-start " key={key}>
       <div className="basis-1/3 relative h-[250px] max-md:hidden">
@@ -24,7 +23,6 @@ const Card = ({ key, item }) => {
         </Link>
 
         {parse(item.desc)}
-        {/* <p dangerouslySetInnerHTML={{ __html:  }}> */}
 
         <div className="flex gap-3 items-center">
           <Image
