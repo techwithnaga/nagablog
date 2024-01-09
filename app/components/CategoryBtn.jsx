@@ -14,7 +14,7 @@ const CategoryBtn = ({ key, title, size }) => {
   if (size === "small") {
     return (
       <button
-        className={`text-sm  px-2 ${
+        className={`text-xs  px-2 py-1 ${
           theme === "dark" ? "text-gray-400" : "text-gray-500"
         } ${
           theme === "dark" ? "bg-gray-800" : "bg-neutral-200"

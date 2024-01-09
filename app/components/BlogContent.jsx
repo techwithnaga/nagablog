@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { MdAccessTime } from "react-icons/md";
 import { FaRegComments } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
+import { LiaReadme } from "react-icons/lia";
 import { format } from "date-fns";
 import { BsTags } from "react-icons/bs";
 import CategoryBtn from "@/app/components/CategoryBtn";
@@ -84,17 +85,24 @@ const BlogContent = () => {
             <p>by {data?.user?.name}</p>
             <div className="flex gap-2 items-center ">
               <MdAccessTime />
-              {format(new Date(), "MMM d, Y")}
+              <span>{format(new Date(), "MMM d, Y")}</span>
             </div>
 
             <div className="flex gap-2 items-center ">
-              <FaRegComments /> 0 comments
+              <FaRegComments /> <span>0 comments</span>
             </div>
 
             <div className="flex gap-2 items-center ">
-              <IoEyeOutline />0 views
+              <IoEyeOutline /> <span>0 views</span>
+            </div>
+            <div className="flex gap-2 items-center ">
+              <LiaReadme></LiaReadme>
+              <span>
+                <input type="number"></input> min read
+              </span>
             </div>
           </div>
+          <hr />
 
           <div className="flex gap-3 items-center">
             <BsTags className="text-gray-500 text-xl"></BsTags>

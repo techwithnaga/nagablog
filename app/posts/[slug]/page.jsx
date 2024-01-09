@@ -9,6 +9,8 @@ import { IoEyeOutline } from "react-icons/io5";
 import { BsTags } from "react-icons/bs";
 import { format } from "date-fns";
 import CategoryBtn from "@/app/components/CategoryBtn";
+import { BsCalendar2Date } from "react-icons/bs";
+import { CgReadme } from "react-icons/cg";
 // import { useQuery } from "@tanstack/react-query";
 
 const getData = async (slug) => {
@@ -53,21 +55,32 @@ const page = async ({ params }) => {
           </div>
 
           <h1 className="">{data?.title}</h1>
+          <div className=" text-sm text-gray-500">{data.desc}</div>
           <div className="flex gap-5 text-gray-500">
-            <p>by {data?.user?.name}</p>
-            <div className="flex gap-2 items-center ">
-              <MdAccessTime />
-              {format(data.createdAt, "MMM d, Y")}
+            <p className="text-xs text-gray-500">by {data?.user?.name}</p>
+            <div className="flex gap-1 items-center ">
+              <BsCalendar2Date className="text-xs" />
+              <p className="text-xs text-gray-500">
+                {format(data.createdAt, "MMM d, Y")}
+              </p>
             </div>
 
-            <div className="flex gap-2 items-center ">
+            <div className="flex gap-1 items-center ">
               <FaRegComments />
-              {data.comments.length} comments
+              <p className="text-xs text-gray-500">
+                {data.comments.length} comments
+              </p>
             </div>
 
-            <div className="flex gap-2 items-center ">
+            <div className="flex gap-1 items-center ">
               <IoEyeOutline />
-              {data.views} views
+              <p className="text-xs text-gray-500">{data.views} views</p>
+            </div>
+            <div className="flex gap-1 items-center">
+              <CgReadme className="text-base text-gray-500"></CgReadme>
+              <p className="text-xs text-gray-500">
+                {data.minutesToRead} mins read
+              </p>
             </div>
           </div>
 
@@ -81,14 +94,20 @@ const page = async ({ params }) => {
               })}
             </div>
           </div>
+
+          <hr />
+
+          <div className=" flex flex-col gap-5 text-xl">
+            {parse(data.content)}
+          </div>
         </div>
         <div className="basis-1/4 max-md:hidden">
           <Menu className=""></Menu>
         </div>
       </div>
+
       <div className="flex mt-16 gap-16">
         <div className="basis-2/3 max-md:basis-full">
-          <div className=" flex flex-col gap-5 text-xl">{parse(data.desc)}</div>
           <div className="mt-16">
             <Comments postSlug={slug}></Comments>
           </div>

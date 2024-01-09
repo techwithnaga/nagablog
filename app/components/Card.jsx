@@ -5,6 +5,8 @@ import parse from "html-react-parser";
 import { BsTags } from "react-icons/bs";
 import { format } from "date-fns";
 import CategoryBtn from "./CategoryBtn";
+import { CgReadme } from "react-icons/cg";
+import { BsCalendar2Date } from "react-icons/bs";
 
 const Card = ({ key, item }) => {
   return (
@@ -24,18 +26,30 @@ const Card = ({ key, item }) => {
 
         {parse(item.desc)}
 
-        <div className="flex gap-3 items-center">
-          <Image
-            src={item.user?.image}
-            width={25}
-            height={25}
-            className="rounded-full"
-            alt="user image"
-          ></Image>
-          <p className="text-xs text-gray-500">{item.user?.name}</p>
-          <p className="text-xs text-gray-500">
-            {format(item.createdAt, "MMM d, y")}
-          </p>
+        <div className="flex gap-5 items-center">
+          <div className="flex gap-2 items-center">
+            <Image
+              src={item.user?.image}
+              width={25}
+              height={25}
+              className="rounded-full"
+              alt="user image"
+            ></Image>
+            <p className="text-xs text-gray-500">{item.user?.name}</p>
+          </div>
+          <div className="flex gap-1 items-center">
+            <BsCalendar2Date className="text-gray-500"></BsCalendar2Date>
+            <p className="text-xs text-gray-500">
+              {format(item.createdAt, "MMM d, y")}
+            </p>
+          </div>
+
+          <div className="flex gap-1 items-center">
+            <CgReadme className="text-xl text-gray-500"></CgReadme>
+            <p className="text-xs text-gray-500">
+              {item.minutesToRead} mins read
+            </p>
+          </div>
         </div>
         <div className="flex gap-3">
           <BsTags></BsTags>
