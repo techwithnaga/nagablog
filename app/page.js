@@ -8,7 +8,7 @@ export default function Home({ searchParams }) {
     <main className="flex justify-center">
       {/* <Featured></Featured> */}
       {/* <CategoryList></CategoryList> */}
-      <div className="flex gap-10 mt-10 justify-between pb-[200px] w-[70%]">
+      <div className="flex gap-10 mt-10 justify-between pb-[100px] w-[70%]">
         <CardList page={page} />
         <Menu></Menu>
       </div>

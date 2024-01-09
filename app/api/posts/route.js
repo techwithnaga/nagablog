@@ -77,13 +77,11 @@ export const POST = async (req) => {
   try {
     const body = await req.json();
 
-    const post = await prisma.post.create({
+    const result = await prisma.post.create({
       data: { ...body, userEmail: session.user.email },
     });
 
-    console.log("POST : " + post);
-
-    return new NextResponse(JSON.stringify(post, { status: 200 }));
+    return new NextResponse(JSON.stringify(result, { status: 200 }));
   } catch (err) {
     console.log(err);
     return new NextResponse(

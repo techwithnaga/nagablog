@@ -17,7 +17,12 @@ import { useRouter } from "next/navigation";
 
 const BlogContent = () => {
   const { title, selectedCategories, mediaUrl } = useBlogStore();
+  const catIds = selectedCategories.map((cat) => {
+    return cat.id;
+  });
   const [content, setContent] = useState("");
+  const [minRead, setMinRead] = useState(1);
+  const [desc, setDesc] = useState();
   const { data } = useSession();
   const router = useRouter();
   const handleSubmit = () => {
@@ -26,12 +31,13 @@ const BlogContent = () => {
         slug: title,
         title: title,
         content: content,
+        desc: desc,
+        minutesToRead: minRead,
         img: mediaUrl,
-        categories: selectedCategories,
+        catIds: catIds,
       })
       .then((res) => {
-        console.log(res.data.slug);
-        router.push(`/posts/${res.slug}`);
+        router.push(`/posts/${res.data.slug}`);
       })
       .catch((err) => {
         console.log(err.message);
@@ -82,6 +88,7 @@ const BlogContent = () => {
             placeholder="Description..."
             rows={5}
             className="border-none bg-[softBgColor]"
+            onChange={(e) => setDesc(e.target.value)}
           />
           <div className="flex gap-5 text-gray-500 ">
             <p>by {data?.user?.name}</p>
@@ -92,8 +99,13 @@ const BlogContent = () => {
             <div className="flex gap-2 items-center ">
               <LiaReadme></LiaReadme>
               <span>
-                <input type="number" className="w-[20%]" min={1}></input> min
-                read
+                <input
+                  type="number"
+                  className="w-[20%]"
+                  min={1}
+                  onChange={(e) => setMinRead(parseInt(e.target.value))}
+                ></input>
+                min read
               </span>
             </div>
 

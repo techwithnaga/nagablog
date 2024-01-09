@@ -20,6 +20,13 @@ const Pagination = ({ page, hasNext, hasPrev, count }) => {
           className={`${theme === "dark" ? "text-white" : "text-black"} `}
         />
       </button>
+      {/* <GrFormPrevious
+        onClick={() => router.push(`?page=${page - 1}`)}
+        disabled={!hasPrev}
+        className={`${
+          theme === "dark" ? "text-white" : "text-black"
+        } cursor-pointer text-2xl`}
+      /> */}
       {(() => {
         const arr = [];
         for (let i = 0; i < numberOfPages; i++) {
@@ -42,9 +49,18 @@ const Pagination = ({ page, hasNext, hasPrev, count }) => {
         disabled={!hasNext}
       >
         <GrFormNext
+          onClick={() => router.push(`?page=${page + 1}`)}
+          disabled={!hasNext}
           className={`${theme === "dark" ? "text-white" : "text-black"} `}
         />
       </button>
+      {/* <GrFormNext
+        onClick={() => router.push(`?page=${page + 1}`)}
+        disabled={!hasNext}
+        className={`${
+          theme === "dark" ? "text-white" : "text-black"
+        } cursor-pointer text-2xl`}
+      /> */}
     </div>
   );
 };
