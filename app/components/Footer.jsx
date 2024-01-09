@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { MdOutlineMarkEmailRead } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <div className="h-[250px] mt-10">
-      <hr />
-      <div className="mt-10 flex items-center max-xl:flex-col">
-        <div className="basis-2/3 flex gap-5">
+    <div className=" flex flex-col justify-center items-center pt-3 border-t border-gray-200 ">
+      <div className="mt-10 flex items-center max-xl:flex-col w-[70%]">
+        <div className="flex flex-col gap-5">
           {/* <div className="flex gap-5 items-center basis-1/5 min-h-[150px] relative ">
           
           </div> */}
@@ -15,58 +15,36 @@ const Footer = () => {
             src="/myPic.png"
             width={150}
             height={200}
-            className="rounded-xl max-sm:hidden"
+            className="rounded-3xl max-sm:hidden"
           ></Image>
           <div className="">
-            <h2>Masnaga</h2>
-            <p className="mt-3 text-gray-500 text-sm">
-              A web developer who is passionate in crafting beautiful,
-              functional web experiences and love the power of the web to
-              connect people and make a difference. Skilled in building both
-              front-end and back-end. Love collaborating to bring your web ideas
-              to life. Let's build something amazing together!
-            </p>
-          </div>
-        </div>
+            <div className="flex gap-5 items-center">
+              <h2>Written By Masnaga</h2>
+              <div className="p-2 rounded-full bg-lime-500 hover:bg-lime-600 hover:text-gray-200">
+                <a href="mailto:techwithnaga@gmail.com">
+                  <MdOutlineMarkEmailRead className="text-2xl cursor-pointer"></MdOutlineMarkEmailRead>
+                </a>
+              </div>
+            </div>
 
-        <div className="basis-1/3 flex flex-col gap-5 items-center max-xl:mt-10">
-          <h4>Let's Connect</h4>
-          <div className="flex gap-3 mt-1 justify-center">
-            <Image
-              className="cursor-pointer"
-              src="/facebook.png"
-              width={20}
-              height={20}
-            ></Image>
-            <Image
-              className="cursor-pointer"
-              src="/instagram.png"
-              width={20}
-              height={20}
-            ></Image>
-            <Image
-              className="cursor-pointer"
-              src="/tiktok.png"
-              width={20}
-              height={20}
-            ></Image>
-            <Image
-              className="cursor-pointer"
-              src="/youtube.png"
-              width={20}
-              height={20}
-            ></Image>
+            <p className="mt-3 text-gray-500 text-sm">
+              Passionate full-stack developer with{" "}
+              {new Date().getFullYear() - 2020} experience bringing ideas to
+              life across front-end (React, Next.js, TailwindCSS) and back-end
+              (Node.js, Python) landscapes. Problem-solving prowess,
+              collaborative spirit, and constant learning fuel innovative
+              solutions for complex challenges. Eager to contribute my skills
+              and fresh perspective to building amazing things. Let's connect
+              and make magic happen!
+            </p>
           </div>
         </div>
       </div>
 
-      <div className="mt-5 flex justify-center p-2">
+      <div className="mt-7 flex justify-center p-2 w-[50%]">
         <label className="text-gray-400">
           &copy;Copyright {new Date().getFullYear()}. All rights reserved.
-          Created by{" "}
-          <span>
-            <a href="">Masnaga</a>
-          </span>
+          Created by <span>Masnaga</span>
         </label>
       </div>
       <div style={{ clear: "both" }}></div>

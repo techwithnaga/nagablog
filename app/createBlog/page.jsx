@@ -192,8 +192,8 @@ const CreateBlog = () => {
   }, []);
 
   return (
-    <div className="my-10 flex-1 flex flex-col gap-5 ">
-      <div className="ring-1 ring-gray-300 p-5 rounded-md ">
+    <div className="my-10 flex-1 flex flex-col items-center gap-5 ">
+      <div className="ring-1 ring-gray-300 p-5 rounded-md w-[75%]">
         <p>What is the title of your blog?</p>
         <input
           type="text"
@@ -208,7 +208,7 @@ const CreateBlog = () => {
         )}
       </div>
       {openUpload && (
-        <div className="ring-1 ring-gray-300 p-5 rounded-md ">
+        <div className="ring-1 ring-gray-300 p-5 rounded-md w-[75%]">
           <p>Which image would you like to use in your blog?</p>
           <input
             type="file"
@@ -263,7 +263,7 @@ const CreateBlog = () => {
       )}
 
       {showTags && (
-        <div className="ring-1 ring-gray-300 p-5 rounded-md ">
+        <div className="ring-1 ring-gray-300 p-5 rounded-md w-[75%]">
           <p>What is your blog about?</p>
 
           <FormGroup className="ml-5">
@@ -298,7 +298,7 @@ const CreateBlog = () => {
 
       {showNextButton && (
         <button
-          className="bg-green-700 rounded-full px-5 py-3 text-white mt-10 font-mono text-xl font-bold"
+          className="bg-lime-600 hover:bg-lime-700 rounded-full px-5 py-3 text-white mt-10 font-mono text-xl font-bold w-[75%]"
           onClick={handleSubmit}
         >
           Next

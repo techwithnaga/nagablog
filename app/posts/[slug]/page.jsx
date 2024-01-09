@@ -4,7 +4,7 @@ import Menu from "../../components/Menu";
 import Comments from "../../components/Comments";
 import parse from "html-react-parser";
 import { MdAccessTime } from "react-icons/md";
-import { FaRegComments } from "react-icons/fa";
+import CommentBtn from "@/app/components/CommentBtn";
 import { IoEyeOutline } from "react-icons/io5";
 import { BsTags } from "react-icons/bs";
 import { format } from "date-fns";
@@ -42,9 +42,9 @@ const page = async ({ params }) => {
   // }
 
   return (
-    <div className="pb-[270px]">
-      <div className="flex justify-between gap-10 mt-10">
-        <div className="flex flex-col basis-3/4 gap-6 max-md:basis-full">
+    <div className="pb-[270px] relative">
+      <div className="flex justify-center mt-10">
+        <div className="flex flex-col gap-6 w-[70%]">
           <div className="w-full h-[475px] relative rounded-xl">
             <Image
               src={data.img}
@@ -65,22 +65,21 @@ const page = async ({ params }) => {
               </p>
             </div>
 
-            <div className="flex gap-1 items-center ">
-              <FaRegComments />
-              <p className="text-xs text-gray-500">
-                {data.comments.length} comments
-              </p>
-            </div>
-
-            <div className="flex gap-1 items-center ">
-              <IoEyeOutline />
-              <p className="text-xs text-gray-500">{data.views} views</p>
-            </div>
             <div className="flex gap-1 items-center">
               <CgReadme className="text-base text-gray-500"></CgReadme>
               <p className="text-xs text-gray-500">
                 {data.minutesToRead} mins read
               </p>
+            </div>
+
+            <CommentBtn
+              length={data.comments.length}
+              slug={data.slug}
+            ></CommentBtn>
+
+            <div className="flex gap-1 items-center ">
+              <IoEyeOutline />
+              <p className="text-xs text-gray-500">{data.views} views</p>
             </div>
           </div>
 
@@ -101,18 +100,18 @@ const page = async ({ params }) => {
             {parse(data.content)}
           </div>
         </div>
-        <div className="basis-1/4 max-md:hidden">
+        {/* <div className="basis-1/4 max-md:hidden">
           <Menu className=""></Menu>
-        </div>
+        </div> */}
       </div>
 
-      <div className="flex mt-16 gap-16">
+      {/* <div className="flex mt-16 gap-16">
         <div className="basis-2/3 max-md:basis-full">
           <div className="mt-16">
             <Comments postSlug={slug}></Comments>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
+import { MdClose } from "react-icons/md";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -16,7 +17,7 @@ const fetcher = async (url) => {
 
   return data;
 };
-const Comments = ({ postSlug }) => {
+const Comments = ({ postSlug, closeComments }) => {
   const { status } = useSession();
   const { data, mutate, isLoading } = useSWR(
     `http://localhost:3000/api/comment?postSlug=${postSlug}`,
@@ -34,11 +35,13 @@ const Comments = ({ postSlug }) => {
 
   const [desc, setDesc] = useState("");
 
-  useEffect(() => {}, [desc]);
-
   return (
-    <div>
-      <h2 className="text-gray-500">Comments</h2>
+    <div className="fixed w-[25%] bg-gray-50 right-0 top-0 overflow-scroll p-5 shadow-xl z-20 h-full">
+      <div className="flex justify-between items-center">
+        <h2 className="text-gray-500">Comments</h2>
+        <MdClose className="text-3xl cursor-pointer" onClick={closeComments} />
+      </div>
+
       {status === "authenticated" ? (
         <div className="flex justify-between gap-5 mt-5">
           <textarea
@@ -66,9 +69,9 @@ const Comments = ({ postSlug }) => {
       ) : (
         data.map((item) => {
           return (
-            <div key={item._id}>
+            <div key={item._id} className="py-5 border-t border-gray-200">
               <div className="flex gap-5 mt-5">
-                <div className="h-12 w-12 relative ">
+                <div className="h-10 w-10 relative ">
                   <Image
                     src={item.user.image}
                     fill
@@ -82,7 +85,7 @@ const Comments = ({ postSlug }) => {
                   </span>
                 </div>
               </div>
-              <div className="mt-2 px-2">
+              <div className="mt-1 px-2">
                 <p>{item.desc}</p>
               </div>
             </div>

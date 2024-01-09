@@ -5,10 +5,10 @@ export default function Home({ searchParams }) {
   const page = parseInt(searchParams.page) || 1;
 
   return (
-    <main className=" ">
+    <main className="flex justify-center">
       {/* <Featured></Featured> */}
       {/* <CategoryList></CategoryList> */}
-      <div className="flex gap-10 mt-10 justify-between pb-[270px]">
+      <div className="flex gap-10 mt-10 justify-between pb-[200px] w-[70%]">
         <CardList page={page} />
         <Menu></Menu>
       </div>

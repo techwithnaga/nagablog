@@ -10,7 +10,7 @@ import { BsCalendar2Date } from "react-icons/bs";
 
 const Card = ({ key, item }) => {
   return (
-    <div className="flex gap-8 items-start " key={key}>
+    <div className="flex gap-8 items-center " key={key}>
       <div className="basis-1/3 relative h-[250px] max-md:hidden">
         <Image
           src={item.img}
@@ -24,7 +24,7 @@ const Card = ({ key, item }) => {
           <h2 className="cursor-pointer">{item.title}</h2>
         </Link>
 
-        {parse(item.desc)}
+        <p className="text-sm text-gray-500">{parse(item.desc)}</p>
 
         <div className="flex gap-5 items-center">
           <div className="flex gap-2 items-center">

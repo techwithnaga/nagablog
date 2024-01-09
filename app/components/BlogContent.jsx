@@ -61,15 +61,17 @@ const BlogContent = () => {
   };
 
   return (
-    <div>
-      <div className="flex justify-between gap-10 mt-10">
-        <div className="flex flex-col basis-3/4 gap-6 max-md:basis-full">
-          <div className="w-full h-[475px] relative rounded-xl">
+    <div className="flex flex-col items-center ">
+      <div className="flex justify-between gap-10 mt-10 w-[75%] pb-5 border-b border-gray-200">
+        <div className="flex flex-col gap-6 max-md:basis-full w-full">
+          <div className="relative rounded-xl ">
             <Image
               src={mediaUrl}
               alt="blog header image"
-              fill
-              objectFit="cover"
+              width="0"
+              height="0"
+              sizes="100vw"
+              className="w-full h-auto"
             ></Image>
           </div>
 
@@ -81,11 +83,18 @@ const BlogContent = () => {
             rows={5}
             className="border-none bg-[softBgColor]"
           />
-          <div className="flex gap-5 text-gray-500">
+          <div className="flex gap-5 text-gray-500 ">
             <p>by {data?.user?.name}</p>
             <div className="flex gap-2 items-center ">
               <MdAccessTime />
               <span>{format(new Date(), "MMM d, Y")}</span>
+            </div>
+            <div className="flex gap-2 items-center ">
+              <LiaReadme></LiaReadme>
+              <span>
+                <input type="number" className="w-[20%]" min={1}></input> min
+                read
+              </span>
             </div>
 
             <div className="flex gap-2 items-center ">
@@ -95,14 +104,7 @@ const BlogContent = () => {
             <div className="flex gap-2 items-center ">
               <IoEyeOutline /> <span>0 views</span>
             </div>
-            <div className="flex gap-2 items-center ">
-              <LiaReadme></LiaReadme>
-              <span>
-                <input type="number"></input> min read
-              </span>
-            </div>
           </div>
-          <hr />
 
           <div className="flex gap-3 items-center">
             <BsTags className="text-gray-500 text-xl"></BsTags>
@@ -115,11 +117,9 @@ const BlogContent = () => {
             </div>
           </div>
         </div>
-        <div className="basis-1/4 max-md:hidden">
-          {/* <Menu className=""></Menu> */}
-        </div>
       </div>
-      <div className="flex mt-16 gap-16">
+
+      <div className="flex flex-col mt-5 gap-16 w-[75%]">
         <div className="basis-2/3 max-md:basis-full">
           <div className=" flex flex-col gap-5 text-xl">
             <ReactQuill
@@ -134,7 +134,7 @@ const BlogContent = () => {
         </div>
       </div>
       <button
-        className="bg-green-500 rounded-full px-5 py-3 text-white mt-10"
+        className="bg-green-500 rounded-full px-10 py-2 text-white mt-16"
         onClick={() => handleSubmit()}
       >
         Publish

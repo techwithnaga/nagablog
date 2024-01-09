@@ -13,7 +13,7 @@ const Navbar = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <div
-      className={`flex items-center justify-between py-4 sticky top-0  z-10 font-mono ${
+      className={`flex items-center justify-between py-4 sticky top-0 z-10 font-mono ${
         theme === "dark" ? "bg-[#0f172a]" : "bg-softBgColor"
       }`}
     >
