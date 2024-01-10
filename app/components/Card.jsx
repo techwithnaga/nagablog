@@ -20,11 +20,14 @@ const Card = ({ key, item }) => {
         ></Image>
       </div>
       <div className="basis-2/3 flex flex-col gap-3 max-md:basis-full">
-        <Link href={`/posts/${item.slug}`}>
-          <h2 className="cursor-pointer">{item.title}</h2>
-        </Link>
-
-        <p className="text-sm text-gray-500">{parse(item.desc)}</p>
+        <div>
+          <Link href={`/posts/${item.slug}`}>
+            <h2 className="cursor-pointer">{item.title}</h2>
+          </Link>
+        </div>
+        <div>
+          <span className="text-sm text-gray-500">{parse(item.desc)}</span>
+        </div>
 
         <div className="flex gap-5 items-center">
           <div className="flex gap-2 items-center">
@@ -35,26 +38,32 @@ const Card = ({ key, item }) => {
               className="rounded-full"
               alt="user image"
             ></Image>
-            <p className="text-xs text-gray-500">{item.user?.name}</p>
+            <span className="text-xs text-gray-500">{item.user?.name}</span>
           </div>
           <div className="flex gap-1 items-center">
             <BsCalendar2Date className="text-gray-500"></BsCalendar2Date>
-            <p className="text-xs text-gray-500">
+            <span className="text-xs text-gray-500">
               {format(item.createdAt, "MMM d, y")}
-            </p>
+            </span>
           </div>
 
           <div className="flex gap-1 items-center">
             <CgReadme className="text-xl text-gray-500"></CgReadme>
-            <p className="text-xs text-gray-500">
+            <span className="text-xs text-gray-500">
               {item.minutesToRead} mins read
-            </p>
+            </span>
           </div>
         </div>
         <div className="flex gap-3">
           <BsTags></BsTags>
           {item.categories.map((cat) => {
-            return <CategoryBtn title={cat.title} size="small"></CategoryBtn>;
+            return (
+              <CategoryBtn
+                key={cat.id}
+                title={cat.title}
+                size="small"
+              ></CategoryBtn>
+            );
           })}
         </div>
       </div>

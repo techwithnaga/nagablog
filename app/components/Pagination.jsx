@@ -7,7 +7,8 @@ import { ThemeContext } from "../context/ThemeContext";
 
 const Pagination = ({ page, hasNext, hasPrev, count }) => {
   const router = useRouter();
-  const numberOfPages = (count % 5) + 1;
+  const numberOfPages = Math.round(count / 5) + (count % 5 === 0 ? 0 : 1);
+
   const { theme, toggle } = useContext(ThemeContext);
   return (
     <div className="flex mt-10 gap-5 justify-center">
@@ -25,7 +26,7 @@ const Pagination = ({ page, hasNext, hasPrev, count }) => {
         disabled={!hasPrev}
         className={`${
           theme === "dark" ? "text-white" : "text-black"
-        } cursor-pointer text-2xl`}
+        } text-2xl ${hasPrev ? "cursor-pointer" : "cursor-auto"}`}
       /> */}
       {(() => {
         const arr = [];

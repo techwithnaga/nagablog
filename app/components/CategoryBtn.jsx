@@ -34,6 +34,7 @@ const CategoryBtn = ({ key, title, size }) => {
           theme === "dark" ? "bg-gray-800" : "bg-neutral-200"
         } font-bold rounded-md cursor-pointer`}
         onClick={() => handleClick()}
+        id={key}
       >
         {title}
       </button>
